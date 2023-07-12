@@ -3,7 +3,16 @@ on: [push]
 jobs:
  Cypress-Test:
    runs-on: ubuntu-latest
-   
+   container: cypress/browsers:node18.12.0-chrome107
+   strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving Cypress Cloud hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run 2 copies of the current job in parallel
+        containers: [1, 2]
    steps:
      - name: Checkout GitCode
        uses: actions/checkout@v2

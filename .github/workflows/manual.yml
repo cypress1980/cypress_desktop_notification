@@ -25,7 +25,6 @@ jobs:
       - name: QAAutomationLabs.com Tests
         uses: cypress-io/github-action@v4
         with:
-          
           record: true
           parallel: true
           group: 'QAAutomationLabs'
